@@ -1,14 +1,18 @@
-import React from 'react';
-import {View, Text} from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-
+import {ScrollView, StyleSheet, View} from 'react-native';
+import FeedPost from './src/components/Post/FeedPost';
 
 const App = () => {
   return (
-    <View style = {{flex:1 ,alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Hello World <AntDesign name='home' size={22}/></Text>
-    </View>
+    <ScrollView style={styles.app}>
+     <FeedPost/>
+    </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  app:{
+    flex: 1,
+  }
+});
 
 export default App;

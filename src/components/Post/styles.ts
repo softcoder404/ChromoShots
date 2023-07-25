@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
         color: colors.black
     },
     threeDots: {
-        marginLeft: 'auto'
+        marginLeft: 'auto',
+        color: colors.black,
     },
     footer: {
         padding: 10,
@@ -36,7 +37,8 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     icon: {
-        marginHorizontal: 5
+        marginHorizontal: 5,
+        color: colors.black,
     },
     text: {
         color: colors.black,
@@ -44,6 +46,7 @@ const styles = StyleSheet.create({
     },
     bold: {
         fontWeight: fonts.weight.bold,
+        color: colors.black,
     },
     commentText: {
         color: colors.black,
@@ -53,6 +56,7 @@ const styles = StyleSheet.create({
     comment: {
         flexDirection: 'row',
         alignItems: 'center',
+        paddingBottom: 4,
     }
 });
 

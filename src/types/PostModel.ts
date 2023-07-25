@@ -6,8 +6,8 @@ export interface IPost {
     video?: string;
     description: string;
     user: IUser;
-    nOfComments: number;
-    nOfLikes: number;
+    nofComments: number;
+    nofLikes: number;
     comments: IComment[];
 }
 
@@ -24,6 +24,6 @@ export interface IUser {
 
 export interface IComment {
     id: string;
-    content: string;
+    comment: string;
     user: IUser;
 }

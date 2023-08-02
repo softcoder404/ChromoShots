@@ -44,6 +44,10 @@ const styles = StyleSheet.create({
         color: colors.black,
         lineHeight: 18,
     },
+    greyText: {
+        color: colors.grey,
+        lineHeight: 16,
+    },
     bold: {
         fontWeight: fonts.weight.bold,
         color: colors.black,
@@ -57,7 +61,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingBottom: 4,
-    }
+    },
+
+
 });
 
 export default styles;

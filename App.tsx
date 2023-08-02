@@ -1,9 +1,7 @@
-import {FlatList, ScrollView, StyleSheet, View} from 'react-native';
-import FeedPost from './src/components/Post/FeedPost';
-import colors from './src/theme/colors';
-import post from './src/data/posts/PostData';
+import { StyleSheet, View} from 'react-native';
 
-import posts from './src/assets/data/posts.json';
+import colors from './src/theme/colors';
+
 import HomeScreen from './src/screens/home/HomeScreen';
 
 

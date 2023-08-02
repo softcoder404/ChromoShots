@@ -1,5 +1,5 @@
-import React  from "react";
-import { Image, SafeAreaView, Text, View } from "react-native";
+import React, { ReactComponentElement, ReactNode, useState }  from "react";
+import { Image, Pressable, SafeAreaView, Text, View } from "react-native";
 import { IPost } from "../../types/PostModel";
 import styles from "./styles";
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -9,12 +9,51 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import colors from "../../theme/colors";
 import font from "../../theme/font";
 import Comment from "../Comment";
+import CustomPressable from "../CustomPressable";
+import { FlatList } from "react-native";
+import Carousel from "../Carousel";
 
 type IFeedPostProps = {post: IPost}
 
 
 
 const FeedPost =({post}: IFeedPostProps) => {
+    const [showMore,setShowMore] = useState(false);
+    const [likedPostIds,setLikedPostIds] = useState<string[]>([]);
+
+    const toggleShowMore = ()=>{
+        setShowMore(initialState => !initialState);
+    }
+
+    const handleSetLikedPost = (postId: string)=> {
+        setLikedPostIds(array => {
+            const exists = array.includes(postId)
+        if (exists) {
+            const tempList = array.filter((id) =>  id !== postId );  
+            return [...tempList]; 
+        } else {
+            const tempList = array
+            tempList.push(postId)
+            return [...tempList];
+        }
+        });
+    }
+
+    let content = null;
+    let items: string[] = [...post.images ?? [], ...post.video ?? []];
+    if(!post.image){
+        content = (
+           <CustomPressable onDoubbleTab={ ()=> handleSetLikedPost(post.id as string)}>
+             <Image source={{uri: post.image}} style= {styles.image}/>
+           </CustomPressable>
+        );
+    }
+    else if((post.images && post.images.length > 0 ) || (post.video && post.video.length > 0)){
+        content = (
+            <Carousel onDoubleTap={()=> handleSetLikedPost(post.id as string)} images={post.images ?? []} videos={post.video ?? []}/>
+        );
+    }
+
     return (
        <SafeAreaView style = { styles.post }>
             {/* Header */}
@@ -26,15 +65,15 @@ const FeedPost =({post}: IFeedPostProps) => {
                 <Entypo name = 'dots-three-horizontal' style = {styles.threeDots}/>
             </View>
             {/* Content */}
-            <Image source={{
-                uri: post.image
-            }} 
-            style = { styles.image} 
-            />
+            {content}
+      
+
             {/* Footer */}
             <View style = { styles.footer}>
                 <View style = {styles.iconContainer}>
-                    <AntDesign name = 'hearto' size={ 24 } style = {styles.icon}/>
+                   <CustomPressable onPress={ ()=> handleSetLikedPost(post.id as string)}>
+                     <AntDesign name = {likedPostIds?.includes(post.id as string) ? 'heart': 'hearto' }  size={ 24 }  style = {{...styles.icon,color: likedPostIds?.includes(post.id as string) ? colors.red : colors.black }}/>
+                    </CustomPressable>
                     <Ionicons name = 'chatbubble-outline' size={ 24 } style = {styles.icon}/>
                     <Feather name = 'send' size={ 24 } style = {styles.icon}/>
                     <Feather name = 'bookmark' size={ 24 } style = {{marginLeft: 'auto',...styles.icon}}/>
@@ -46,10 +85,11 @@ const FeedPost =({post}: IFeedPostProps) => {
                     <Text style = {styles.bold}> {post.nofLikes} others </Text>
                 </Text>
                 {/* Post Description */}
-                <Text style = {styles.text}>
+                <Text style = {styles.text} numberOfLines={showMore ? 0 : 2}>
                     <Text style = {styles.bold} >{post.user.username} </Text>
                     {post.description}
                 </Text>
+                <Text style={styles.greyText} onPress={ toggleShowMore } >View More</Text>
 
                  {/* Comments */}
                  <Text style = {{paddingTop: 5, color: colors.grey, fontWeight: font.weight.bold}}>View all {post.nofComments} comments</Text>
@@ -57,7 +97,7 @@ const FeedPost =({post}: IFeedPostProps) => {
                      <Comment key= {item.id} comment= {item} />
                 ))}
                 {/* Posted Date */}
-                <Text style = {{color: colors.grey}}>{post.createdAt}</Text>
+                <Text style = {styles.greyText}>{post.createdAt}</Text>
                 
 
             </View>

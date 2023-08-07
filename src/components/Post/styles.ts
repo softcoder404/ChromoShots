@@ -52,18 +52,6 @@ const styles = StyleSheet.create({
         fontWeight: fonts.weight.bold,
         color: colors.black,
     },
-    commentText: {
-        color: colors.black,
-        flex: 1,
-        lineHeight: 18,
-    },
-    comment: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingBottom: 4,
-    },
-
-
 });
 
 export default styles;

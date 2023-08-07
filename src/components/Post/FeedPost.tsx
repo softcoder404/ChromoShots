@@ -1,5 +1,5 @@
-import React, { ReactComponentElement, ReactNode, useState }  from "react";
-import { Image, Pressable, SafeAreaView, Text, View } from "react-native";
+import React, { useState }  from "react";
+import { Image, SafeAreaView, Text, View } from "react-native";
 import { IPost } from "../../types/PostModel";
 import styles from "./styles";
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -10,14 +10,16 @@ import colors from "../../theme/colors";
 import font from "../../theme/font";
 import Comment from "../Comment";
 import CustomPressable from "../CustomPressable";
-import { FlatList } from "react-native";
 import Carousel from "../Carousel";
 
-type IFeedPostProps = {post: IPost}
+type IFeedPostProps = {
+    post: IPost
+    isVisible: boolean,
+}
 
 
 
-const FeedPost =({post}: IFeedPostProps) => {
+const FeedPost =({post,isVisible}: IFeedPostProps) => {
     const [showMore,setShowMore] = useState(false);
     const [likedPostIds,setLikedPostIds] = useState<string[]>([]);
 
@@ -40,19 +42,20 @@ const FeedPost =({post}: IFeedPostProps) => {
     }
 
     let content = null;
-    let items: string[] = [...post.images ?? [], ...post.video ?? []];
-    if(!post.image){
+    let medias: string[] = [...post.images ?? [], ...post.videos ?? []];
+    medias.sort();
+    if(medias.length > 0){
+       content = <Carousel isVisible={isVisible} onDoubleTap={()=> handleSetLikedPost(post.id as string)} medias={medias} />
+    }
+    else{
         content = (
            <CustomPressable onDoubbleTab={ ()=> handleSetLikedPost(post.id as string)}>
              <Image source={{uri: post.image}} style= {styles.image}/>
            </CustomPressable>
         );
     }
-    else if((post.images && post.images.length > 0 ) || (post.video && post.video.length > 0)){
-        content = (
-            <Carousel onDoubleTap={()=> handleSetLikedPost(post.id as string)} images={post.images ?? []} videos={post.video ?? []}/>
-        );
-    }
+   
+    
 
     return (
        <SafeAreaView style = { styles.post }>

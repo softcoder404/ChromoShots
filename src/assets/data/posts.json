@@ -8,6 +8,9 @@
         "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/2.jpg",
         "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/3.jpg"
       ],
+      "videos": [
+        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+      ],
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic repellendus unde blanditiis. Eos fugiat dolorem ea fugit aut sapiente corrupti autem dolores deleniti architecto, omnis, amet unde dignissimos quam minima?",
       "user": {
         "id": "u1",
@@ -44,6 +47,9 @@
         "https://media.istockphoto.com/id/1363588189/photo/healthy-lifestyle-on-ketogenic-diet-eating-clean-keto-food-good-health-dietary-in-heart-dish.jpg?s=612x612&w=0&k=20&c=RVW_a2Bq3eYeUWqkUbTUHkiQbGJaAMa9Q2fyljGymgY=",
         "https://media.istockphoto.com/id/1296507353/photo/nutritional-food-for-heart-health-wellness-by-cholesterol-diet-and-healthy-nutrition-eating.jpg?s=612x612&w=0&k=20&c=n66Z0NMlnajfC41Jlvxm9Xd5d-T8W-ObHY3hNbeHTgw="
       ],
+      "videos": [
+        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+      ],
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic repellendus unde blanditiis. Eos fugiat dolorem ea fugit aut sapiente corrupti autem dolores deleniti architecto, omnis, amet unde dignissimos quam minima?",
       "user": {
         "id": "u1",
@@ -77,7 +83,10 @@
       "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/3.jpg",
       "images": [
         "https://media.istockphoto.com/id/1161805849/photo/strawberry-vanilla-chocolate-ice-cream-with-waffle-cone-on-marble-stone-backgrounds.jpg?s=612x612&w=0&k=20&c=BXObHKE0gbA2autsMZGFeEmK2xGKYdJBbM1_ig0Boyk=",
-        "https://media.istockphoto.com/id/1173648810/photo/ice-cream-in-couple-hands.jpg?s=612x612&w=0&k=20&c=sS0JdeHWK4u0-hFI_vS3uKERkXnlWexmpGsLRn8btcY="      ],
+        "https://media.istockphoto.com/id/1173648810/photo/ice-cream-in-couple-hands.jpg?s=612x612&w=0&k=20&c=sS0JdeHWK4u0-hFI_vS3uKERkXnlWexmpGsLRn8btcY="],
+        "videos": [
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+        ],
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic repellendus unde blanditiis. Eos fugiat dolorem ea fugit aut sapiente corrupti autem dolores deleniti architecto, omnis, amet unde dignissimos quam minima?",
       "user": {
         "id": "u1",
@@ -142,5 +151,7 @@
         }
       ]
     }
+   
   ]
+  
   

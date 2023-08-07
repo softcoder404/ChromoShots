@@ -2,32 +2,25 @@ import { FlatList, Image, StyleSheet, View, ViewToken, useWindowDimensions } fro
 import React, { useRef, useState } from 'react'
 import CustomPressable from '../CustomPressable';
 import colors from '../../theme/colors';
+import VideoPlayer from '../VideoPlayer/VideoPlayer';
+import OnViewableItemsChangedProps from '../../types/OnViewableItemProps';
 
 
 type CarouselProps = {
-    images: string[],
-    videos: string[],
+    medias: string[],
     onDoubleTap: ()=>void,
+    isVisible: boolean,
 };
 
-type OnViewableItemsChangedProps = {
-    viewableItems: Array<ViewToken>;
-    changed: Array<ViewToken>;
-  };
 
 
-const Carousel = ({images,videos,onDoubleTap}:CarouselProps) => {
-    const {width} = useWindowDimensions();
+const Carousel = ({medias,isVisible,onDoubleTap}:CarouselProps) => {
     const [activeItemIdex,setItemIndex] = useState(0);
-    console.log("rebuild")
+    const {width} = useWindowDimensions();
     const viewabilityConfig = {
-            waitForInteraction: true,
-            itemVisiblePercentThreshold: 70 //if more than 70% of the item is on screen consider it visible
+            itemVisiblePercentThreshold: 50 //if more than 70% of the item is on screen consider it visible
     };
-
-    //! Note that onViawableItemsChanged can not be changed when rebuilding, 
-    //! So we need to make sure that the function handler does not rebuild
-    //! we can make use of useRef to reference the function late
+    medias.sort()
     const handleOnViewableItemChanged = useRef(
         ({viewableItems}:OnViewableItemsChangedProps)=>{
             if(viewableItems.length > 0){
@@ -44,17 +37,28 @@ const Carousel = ({images,videos,onDoubleTap}:CarouselProps) => {
         showsHorizontalScrollIndicator = {false}
         onViewableItemsChanged={handleOnViewableItemChanged.current}
         viewabilityConfig={viewabilityConfig}
-        data={images}
-        renderItem={ ({item}) =>
-        <CustomPressable onDoubbleTab={onDoubleTap}>
-            <Image source={{uri:item}} style= {{...styles.corouselImageItem,width}} />
-        </CustomPressable> 
+        data={medias}
+        renderItem={ ({item}) => {
+            if(item.includes('.mp4')){
+                return (
+                    <CustomPressable onDoubbleTab={onDoubleTap}>
+                        <VideoPlayer paused={!isVisible} uri = {item}/>
+                    </CustomPressable>
+                );
+            }else{
+                return (
+                    <CustomPressable onDoubbleTab={onDoubleTap}>
+                        <Image source={{uri:item}} style= {{...styles.corouselImageItem,width}} />
+                    </CustomPressable>
+                );
+            }
+        }
         }
         />  
         {/* Row Indicators */}
         <View 
             style = {styles.postIndicatorHolder}>
-            {images?.map((_,index)=> <View key={index} style={{backgroundColor: activeItemIdex === index ? colors.white : colors.grey, ...styles.indicator}}/> )}
+            {medias?.map((_,index)=> <View key={index} style={{backgroundColor: activeItemIdex === index ? colors.white : colors.grey, ...styles.indicator}}/> )}
         </View>
     </View>
   )

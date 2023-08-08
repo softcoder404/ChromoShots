@@ -35,6 +35,10 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Instagram need access to your camera in other to change your profile pictures</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Instagram need access to your photo gallery in other to change your profile pictures</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>UILaunchStoryboardName</key>

@@ -1,5 +1,5 @@
 import React, { useState }  from "react";
-import { Image, SafeAreaView, Text, View } from "react-native";
+import { Image, Pressable, SafeAreaView, Text, View } from "react-native";
 import { IPost } from "../../types/PostModel";
 import styles from "./styles";
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -11,6 +11,7 @@ import font from "../../theme/font";
 import Comment from "../Comment";
 import CustomPressable from "../CustomPressable";
 import Carousel from "../Carousel";
+import { useNavigation } from "@react-navigation/native";
 
 type IFeedPostProps = {
     post: IPost
@@ -55,15 +56,19 @@ const FeedPost =({post,isVisible}: IFeedPostProps) => {
         );
     }
    
-    
-
+    const navigator = useNavigation();
+    const onProfileTap = ()=>{
+        navigator.navigate('Profile',{userId: post.user.id});
+    }
     return (
        <SafeAreaView style = { styles.post }>
             {/* Header */}
             <View style = {styles.header}>
+                <Pressable onPress={onProfileTap}>
                 <Image source= {{
                     uri: post.user.image
                 }} style = {styles.userAvatar}/>
+                </Pressable>
                 <Text style= {styles.bold} >{post.user.username}</Text>
                 <Entypo name = 'dots-three-horizontal' style = {styles.threeDots}/>
             </View>
@@ -97,7 +102,7 @@ const FeedPost =({post,isVisible}: IFeedPostProps) => {
                  {/* Comments */}
                  <Text style = {{paddingTop: 5, color: colors.grey, fontWeight: font.weight.bold}}>View all {post.nofComments} comments</Text>
                  {post.comments.map(item =>(
-                     <Comment key= {item.id} comment= {item} />
+                     <Comment includeDetails={false} key= {item.id} comment= {item} />
                 ))}
                 {/* Posted Date */}
                 <Text style = {styles.greyText}>{post.createdAt}</Text>

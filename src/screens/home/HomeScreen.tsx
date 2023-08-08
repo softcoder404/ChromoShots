@@ -1,10 +1,9 @@
-import { FlatList, ViewToken } from 'react-native';
+import { FlatList } from 'react-native';
 import posts from '../../assets/data/posts.json';
 import FeedPost from '../../components/Post';
 import { IPost } from '../../types/PostModel';
 import { useRef, useState } from 'react';
 import OnViewableItemsChangedProps from '../../types/OnViewableItemProps';
-
 
 
 
@@ -19,10 +18,12 @@ const HomeScreen = () => {
   const viewabilityConfig = {
     itemVisiblePercentThreshold: 50 //if more than 70% of the item is on screen consider it visible
 }
+
+
   return (
     <FlatList 
     data= {posts as IPost[]} 
-    renderItem={({item})=>  <FeedPost key={item.id} post={item} isVisible = {activePostId === item.id} /> }
+    renderItem={({item})=>  <FeedPost key={Date.now.toString()} post={item} isVisible = {activePostId === item.id} /> }
     showsVerticalScrollIndicator = {false}
     viewabilityConfig={viewabilityConfig}
     onViewableItemsChanged={ onViewableItemsChangedRef.current }

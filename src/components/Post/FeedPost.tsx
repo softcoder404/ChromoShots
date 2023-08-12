@@ -12,6 +12,7 @@ import Comment from "../Comment";
 import CustomPressable from "../CustomPressable";
 import Carousel from "../Carousel";
 import { useNavigation } from "@react-navigation/native";
+import { FeedNavigationProps, HomeStackNavigatorType } from "../../navigation/NavigatorTypes";
 
 type IFeedPostProps = {
     post: IPost
@@ -56,9 +57,12 @@ const FeedPost =({post,isVisible}: IFeedPostProps) => {
         );
     }
    
-    const navigator = useNavigation();
+    const navigator = useNavigation<FeedNavigationProps>();
     const onProfileTap = ()=>{
-        navigator.navigate('Profile',{userId: post.user.id});
+        navigator.navigate('UserProfile',{userId: post.user.id});
+    }
+    const onCommentTap = ()=>{
+        navigator.navigate('Comments',{postId: post.id});
     }
     return (
        <SafeAreaView style = { styles.post }>

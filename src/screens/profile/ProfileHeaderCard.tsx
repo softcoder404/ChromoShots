@@ -4,8 +4,11 @@ import Button from '../../components/Button/Button';
 import colors from '../../theme/colors';
 import fonts from '../../theme/font';
 import user from '../../assets/data/user.json';
+import { useNavigation } from '@react-navigation/native';
+import { ProfileNavigatorProps } from '../../navigation/NavigatorTypes';
 
 const ProfileHeaderCard = () => {
+    const navigation = useNavigation<ProfileNavigatorProps>();
   return (
     <View style= {styles.profileHeaderCard}>
     <View style= {styles.headerRow}>
@@ -29,7 +32,7 @@ const ProfileHeaderCard = () => {
     <Text  style={{paddingTop:8}} >{user.bio}</Text>
     {/* Buttons */}
     <View style={styles.actionButtonRow}>
-        <Button title={ "Edit Profile" }/>
+        <Button onPress={()=>navigation.navigate('Edit Profile')} title={ "Edit Profile" }/>
         <Button title={ "More" }/>
     </View>
   </View>

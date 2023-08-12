@@ -5,11 +5,12 @@ import fonts from '../../theme/font'
 
 
 type ButtonProps = {
-    title?: string
+    title?: string,
+    onPress?: ()=> void,
 }
-const Button = ({title = "Button"}:ButtonProps) => {
+const Button = ({onPress = ()=>{}, title = "Button"}:ButtonProps) => {
   return (
-    <Pressable style={styles.container}>
+    <Pressable onPress={onPress} style={styles.container}>
       <Text style={styles.text}>{title}</Text>
     </Pressable>
   )
